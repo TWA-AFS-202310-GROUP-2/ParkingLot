@@ -17,7 +17,6 @@ namespace Parking
 
         public string Park(string carNumber)
         {
-            string ticket = null;
             var lotWithMostEmptySpaces = parkingLotList.OrderByDescending(lot => lot.GetAvailableSpaces()).FirstOrDefault();
             if (lotWithMostEmptySpaces == null)
             {
@@ -29,12 +28,11 @@ namespace Parking
 
         public string FetchCar(string ticket = null)
         {
-            string carNumber = null;
             foreach (var parkingLot in parkingLotList)
             {
                 try
                 {
-                    carNumber = parkingLot.FetchCar(ticket);
+                    string carNumber = parkingLot.FetchCar(ticket);
                     return carNumber;
                 }
                 catch (WrongTicketException wrongTicketException)
