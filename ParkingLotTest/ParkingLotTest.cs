@@ -30,26 +30,34 @@ namespace ParkingLotTest
 
         [Theory]
         [InlineData("car")]
-        public void Should_not_fetch_car_when_FetchCar_without_or_with_wrong_ticket(string carNumber)
+        public void Should_not_fetch_car_when_FetchCar_without_ticket(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticket = parkingLot.Park(carNumber);
-            string car = parkingLot.FetchCar("12344");
-            string car2 = parkingLot.FetchCar();
+            string car = parkingLot.FetchCar();
             Assert.Null(car);
-            Assert.Null(car2);
         }
 
         [Theory]
         [InlineData("car")]
-        public void Should_not_fetch_car_when_FetchCar_with_used_ticket(string carNumber)
+        public void Should_throw_WrongTicketException_when_FetchCar_with_wrong_ticket(string ticket)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.FetchCar(ticket));
+
+            Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
+        }
+
+        [Theory]
+        [InlineData("car")]
+        public void Should_throw_WrongTicketException_when_FetchCar_with_used_ticket(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticket = parkingLot.Park(carNumber);
             string car = parkingLot.FetchCar(ticket);
-            string car2 = parkingLot.FetchCar(ticket);
-            Assert.Equal(carNumber, car);
-            Assert.Null(car2);
+            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.FetchCar(ticket));
+
+            Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
 
         [Theory]

@@ -25,18 +25,16 @@
             return ticket;
         }
 
-        public string FetchCar(string ticket = "")
+        public string FetchCar(string ticket = null)
         {
-            if (!ticketCarMap.ContainsKey(ticket))
+            if (ticket == null)
             {
-                Console.WriteLine("Wrong ticket");
                 return null;
             }
 
-            if (usedTickets.Contains(ticket))
+            if (!ticketCarMap.ContainsKey(ticket) || usedTickets.Contains(ticket))
             {
-                Console.WriteLine("Used ticket");
-                return null;
+                throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
             usedTickets.Add(ticket);
