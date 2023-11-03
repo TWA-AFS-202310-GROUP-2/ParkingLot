@@ -31,7 +31,7 @@ namespace ParkingLot
 
             if (!ticket2Car.ContainsKey(ticket))
             {
-                throw new WrongTicketException("Unrecognized parking ticket");
+                throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
             this.car = ticket2Car[ticket];
