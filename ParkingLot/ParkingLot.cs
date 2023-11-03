@@ -10,6 +10,17 @@
         private readonly Dictionary<string, string> ticketCarMap = new Dictionary<string, string>();
         private int parkingCount = 0;
 
+        public ParkingLot()
+        {
+        }
+
+        public ParkingLot(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; private set; }
+
         public string Park(string carNumber)
         {
             if (parkingCount >= capacity)
@@ -17,7 +28,7 @@
                 throw new FullCapacityException("No available position.");
             }
 
-            var ticket = Guid.NewGuid().ToString();
+            var ticket = $"{Name}-{Guid.NewGuid()}";
             ticketCarMap[ticket] = carNumber;
             parkingCount++;
 
