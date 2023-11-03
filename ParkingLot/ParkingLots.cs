@@ -8,14 +8,25 @@ namespace ParkingLot
 {
     public class ParkingLots
     {
-        public string Fetch(string ticket)
+        private IDictionary<string, string> carTickets = new Dictionary<string, string>();
+        public string Park(string car)
         {
-            return "Car";
+            string ticketNumber = Guid.NewGuid().ToString();
+            string ticketName = $"Ticket {ticketNumber}";
+            this.carTickets.Add(ticketName, car);
+
+            return ticketName;
         }
 
-        public string Park(string v)
+        public string Fetch(string ticket)
         {
-            return "ticketNumber";
+            if (this.carTickets.ContainsKey(ticket))
+            {
+                string car = carTickets[ticket];
+                return car;
+            }
+
+            return "wrong ticket";
         }
     }
 }
