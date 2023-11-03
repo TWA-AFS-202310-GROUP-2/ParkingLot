@@ -51,5 +51,19 @@ namespace ParkingLotTest
             Assert.Equal(carNumber, car);
             Assert.Null(car2);
         }
+
+        [Theory]
+        [InlineData("car")]
+        public void Should_not_park_car_when_Park_given_full_capacity_parking_lot(string carNumber)
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            for (int i = 0; i < 10; i++)
+            {
+                parkingLot.Park(carNumber);
+            }
+
+            string ticket = parkingLot.Park(carNumber);
+            Assert.Null(ticket);
+        }
     }
 }
