@@ -12,7 +12,15 @@ namespace Parking
 
         public string fetch(string ticket)
         {
-            string car = ticket2Car[ticket];
+            string car;
+            if (ticket2Car.ContainsKey(ticket))
+            {
+                car = ticket2Car[ticket];
+            }
+            else
+            {
+                car = "No car";
+            }
             return car;
         }
 
