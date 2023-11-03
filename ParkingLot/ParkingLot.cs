@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Parking
 {
@@ -7,11 +8,16 @@ namespace Parking
     public class ParkingLot
     {
         private int parkingCapacity = 10;
+        public int ParkingCapacity
+        {
+            get => parkingCapacity;
+            set => parkingCapacity = value;
+        }
         private Dictionary<string,string> ticket2Car = new Dictionary<string, string>();
 
         public ParkingLot() { }
 
-        public string fetch(string ticket)
+        public string Fetch(string ticket)
         {
             string car;
             if (!ticket2Car.ContainsKey(ticket)||string.IsNullOrEmpty(ticket))
@@ -20,6 +26,7 @@ namespace Parking
             }
 
             car = ticket2Car[ticket];
+            parkingCapacity++;
             ticket2Car.Remove(ticket);
             return car;
         }
@@ -40,5 +47,7 @@ namespace Parking
             parkingCapacity--;
             return ticket;
         }
+
+
     }
 }
