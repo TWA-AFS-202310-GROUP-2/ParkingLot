@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Parking;
 
@@ -20,7 +21,7 @@ public class FoolParkingBoy
         }
     }
 
-    public Ticket Park(string car)
+    public virtual Ticket Park(string car)
     {
         ParkingLot parkingLot =null;
         int location = -1;
@@ -66,5 +67,15 @@ public class FoolParkingBoy
     public void setParkingListCapacity(int index, int capacity)
     {
         _parkingLotList[index].ParkingCapacity=capacity;
+    }
+
+    public void SortParkingLotByCapacity()
+    {
+        _parkingLotList.Sort((p1, p2) => p1.ParkingCapacity - p2.ParkingCapacity);
+    }
+
+    public List<ParkingLot> GetParkLots()
+    {
+        return _parkingLotList; 
     }
 }
