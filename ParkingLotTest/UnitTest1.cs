@@ -6,10 +6,15 @@ namespace ParkingLotTest
     public class UnitTest1
     {
         [Fact]
-        public void Test1()
+        public void Should_return_car_When_fetch_Given_ticket()
         {
-            var class1 = new Class1();
-            Assert.NotNull(class1);
+            //Given
+            ParkingLots parkingLots = new ParkingLots();
+            string ticket = parkingLots.Park("Car");
+            //when
+            string car = parkingLots.Fetch(ticket);
+            //then
+            Assert.Equal("Car", car);
         }
     }
 }
