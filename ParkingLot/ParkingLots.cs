@@ -36,6 +36,7 @@ namespace ParkingLot
 
             this.car = ticket2Car[ticket];
             ticket2Car.Remove(ticket);
+            capacity++;
             return this.car;
         }
 
