@@ -61,7 +61,7 @@ namespace ParkingLotTest
 
         [Theory]
         [InlineData("car1", "car2")]
-        public void Should_get_correct_car_when_fetch_with_corresponding_ticket(string carNumber1, string carNumber2)
+        public void Should_get_correct_car_when_FetchCar_with_corresponding_ticket(string carNumber1, string carNumber2)
         {
             List<ParkingLot> parkingLots = new List<ParkingLot>
         {

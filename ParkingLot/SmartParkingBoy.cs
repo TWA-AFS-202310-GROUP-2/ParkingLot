@@ -24,7 +24,7 @@ namespace Parking
                 throw new FullCapacityException("No available position.");
             }
 
-            return lotWithMostEmptySpaces.Park(ticket);
+            return lotWithMostEmptySpaces.Park(carNumber);
         }
 
         public string FetchCar(string ticket = null)
