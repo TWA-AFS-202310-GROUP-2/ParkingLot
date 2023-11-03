@@ -78,8 +78,8 @@ namespace ParkingLotTest
                 parkingBoy.Park(carNumber);
             }
 
-            string ticket = parkingBoy.Park(carNumber);
-            Assert.Null(ticket);
+            FullCapacityException fullCapacityException = Assert.Throws<FullCapacityException>(() => parkingLot.Park(carNumber));
+            Assert.Equal("No available position.", fullCapacityException.Message);
         }
     }
 }

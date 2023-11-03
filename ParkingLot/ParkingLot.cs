@@ -14,8 +14,7 @@
         {
             if (parkingCount >= capacity)
             {
-                Console.WriteLine("No available position.");
-                return null;
+                throw new FullCapacityException("No available position.");
             }
 
             var ticket = Guid.NewGuid().ToString();
