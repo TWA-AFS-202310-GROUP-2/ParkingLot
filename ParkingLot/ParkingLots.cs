@@ -14,15 +14,19 @@ namespace ParkingLot
         public string Fetch(string ticket)
         {
             //if (ticket2Car.ContainsKey(ticket))
-            if (ticket == null || !ticket2Car.ContainsKey(ticket))
+            if (ticket == null)
             {
                 return null;
             }
-            else
+
+            if (!ticket2Car.ContainsKey(ticket))
             {
-                this.car = ticket2Car[ticket];
-                return this.car;
+                throw new WrongTicketException("Unrecognized parking ticket");
             }
+
+            this.car = ticket2Car[ticket];
+            ticket2Car.Remove(ticket);
+            return this.car;
         }
 
         public string Park(string car)
