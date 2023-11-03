@@ -25,8 +25,14 @@
             return ticket;
         }
 
-        public string FetchCar(string ticket)
+        public string FetchCar(string ticket = "")
         {
+            if (!ticketCarMap.ContainsKey(ticket))
+            {
+                Console.WriteLine("Wrong ticket");
+                return null;
+            }
+
             usedTickets.Add(ticket);
             return ticketCarMap[ticket];
         }
