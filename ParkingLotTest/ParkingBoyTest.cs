@@ -1,17 +1,19 @@
+﻿using Xunit;
+
 namespace ParkingLotTest
 {
     using Parking;
-    using Xunit;
 
-    public class ParkingLotTest
+    public class ParkingBoyTest
     {
         [Theory]
         [InlineData("car")]
         public void Should_get_the_same_car_when_FetchCar_by_ticket(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park(carNumber);
-            string car = parkingLot.FetchCar(ticket);
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+            string ticket = parkingBoy.Park(carNumber);
+            string car = parkingBoy.FetchCar(ticket);
             Assert.Equal(carNumber, car);
         }
 
@@ -20,10 +22,11 @@ namespace ParkingLotTest
         public void Should_get_correct_car_when_fetch_with_corresponding_ticket(string carNumber1, string carNumber2)
         {
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park(carNumber1);
-            string ticket2 = parkingLot.Park(carNumber2);
-            string car = parkingLot.FetchCar(ticket);
-            string car2 = parkingLot.FetchCar(ticket2);
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+            string ticket = parkingBoy.Park(carNumber1);
+            string ticket2 = parkingBoy.Park(carNumber2);
+            string car = parkingBoy.FetchCar(ticket);
+            string car2 = parkingBoy.FetchCar(ticket2);
             Assert.Equal(carNumber1, car);
             Assert.Equal(carNumber2, car2);
         }
@@ -33,8 +36,9 @@ namespace ParkingLotTest
         public void Should_not_fetch_car_when_FetchCar_without_ticket(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park(carNumber);
-            string car = parkingLot.FetchCar();
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+            string ticket = parkingBoy.Park(carNumber);
+            string car = parkingBoy.FetchCar();
             Assert.Null(car);
         }
 
@@ -43,7 +47,8 @@ namespace ParkingLotTest
         public void Should_throw_WrongTicketException_when_FetchCar_with_wrong_ticket(string ticket)
         {
             ParkingLot parkingLot = new ParkingLot();
-            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.FetchCar(ticket));
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingBoy.FetchCar(ticket));
 
             Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
@@ -53,9 +58,10 @@ namespace ParkingLotTest
         public void Should_throw_WrongTicketException_when_FetchCar_with_used_ticket(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
-            string ticket = parkingLot.Park(carNumber);
-            string car = parkingLot.FetchCar(ticket);
-            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.FetchCar(ticket));
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+            string ticket = parkingBoy.Park(carNumber);
+            string car = parkingBoy.FetchCar(ticket);
+            WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingBoy.FetchCar(ticket));
 
             Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
@@ -65,12 +71,14 @@ namespace ParkingLotTest
         public void Should_not_park_car_when_Park_given_full_capacity_parking_lot(string carNumber)
         {
             ParkingLot parkingLot = new ParkingLot();
+            ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
             for (int i = 0; i < 10; i++)
             {
-                parkingLot.Park(carNumber);
+                parkingBoy.Park(carNumber);
             }
 
-            string ticket = parkingLot.Park(carNumber);
+            string ticket = parkingBoy.Park(carNumber);
             Assert.Null(ticket);
         }
     }

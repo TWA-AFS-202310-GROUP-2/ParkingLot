@@ -1,4 +1,4 @@
-﻿namespace ParkingLot
+﻿namespace Parking
 {
     using System;
     using System.Collections.Generic;
