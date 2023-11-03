@@ -14,7 +14,7 @@
         {
             if (parkingCount >= capacity)
             {
-                Console.WriteLine("No available position. Cannot park more cars.");
+                Console.WriteLine("No available position.");
                 return null;
             }
 
@@ -33,7 +33,15 @@
                 return null;
             }
 
+            if (usedTickets.Contains(ticket))
+            {
+                Console.WriteLine("Used ticket");
+                return null;
+            }
+
             usedTickets.Add(ticket);
+            parkingCount--;
+
             return ticketCarMap[ticket];
         }
     }
