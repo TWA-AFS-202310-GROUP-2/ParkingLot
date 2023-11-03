@@ -16,6 +16,7 @@ namespace Parking
             if (ticket2Car.ContainsKey(ticket))
             {
                 car = ticket2Car[ticket];
+                ticket2Car.Remove(ticket);
             }
             else
             {

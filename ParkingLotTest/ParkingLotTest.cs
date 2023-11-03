@@ -38,5 +38,16 @@ namespace ParkingLotTest
             string car1 = parkingLot.fetch("car2");
             Assert.Equal("No car", car1);
         }
+
+        [Fact]
+        public void Should_get_no_car_when_car_aleady_fetched_by_ticket()
+        {
+            ParkingLot parkingLot = new ParkingLot();
+
+            string ticket1 = parkingLot.Park("car1");
+            parkingLot.fetch(ticket1);
+            string car1 = parkingLot.fetch(ticket1);
+            Assert.Equal("No car", car1);
+        }
     }
 }
