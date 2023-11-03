@@ -10,7 +10,17 @@ namespace ParkingLot
     {
         private string? car;
         private string? ticket;
+        private int capacity = 10;
         private Dictionary<string?, string?> ticket2Car = new Dictionary<string?, string?>();
+        public ParkingLots(int capacity)
+        {
+            this.capacity = capacity;
+        }
+
+        public ParkingLots()
+        {
+        }
+
         public string Fetch(string ticket)
         {
             //if (ticket2Car.ContainsKey(ticket))
@@ -32,9 +42,18 @@ namespace ParkingLot
         public string Park(string car)
         {
             this.ticket = "T-" + car;
-            ticket2Car.Add(this.ticket, car);
-            this.car = car;
-            return this.ticket;
+            capacity--;
+
+            if (capacity <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                ticket2Car.Add(this.ticket, car);
+                this.car = car;
+                return this.ticket;
+            }
         }
 
         public string Park()
