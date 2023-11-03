@@ -36,9 +36,8 @@ namespace ParkingLotTest
             ParkingLot parkingLot = new ParkingLot();
             string ticket1 = parkingLot.Park("car1");
 
-            string car1 = parkingLot.fetch("car2");
-
-            Assert.Equal("No car", car1);
+            var expection = Assert.Throws<WrongTicketExecption>((() => parkingLot.fetch("car2")));
+            Assert.Equal("Unrecognized parking ticket.", expection.Message);
         }
 
         [Fact]
@@ -48,9 +47,9 @@ namespace ParkingLotTest
             string ticket1 = parkingLot.Park("car1");
             parkingLot.fetch(ticket1);
 
-            string car1 = parkingLot.fetch(ticket1);
+            var expection = Assert.Throws<WrongTicketExecption>((() => parkingLot.fetch(ticket1)));
 
-            Assert.Equal("No car", car1);
+            Assert.Equal("Unrecognized parking ticket.",expection.Message);
         }
 
         [Fact]
@@ -68,9 +67,9 @@ namespace ParkingLotTest
             parkingLot.Park("car9");
             parkingLot.Park("car10");
 
-            string ticket1 = parkingLot.Park("car11");
+            var expection = Assert.Throws<NoCapacityExecption>((() => parkingLot.Park("car11")));
 
-            Assert.Equal("No capacity", ticket1);
+            Assert.Equal("No available position", expection.Message);
         }
 
         [Fact]
@@ -81,7 +80,7 @@ namespace ParkingLotTest
 
             string ticket1 = parkingLot.Park("car1");
 
-            Assert.Equal("Error car", ticket1);
+            Assert.Equal("", ticket1);
         }
 
         [Fact]
@@ -91,7 +90,7 @@ namespace ParkingLotTest
 
             string ticket1 = parkingLot.Park("");
 
-            Assert.Equal("Error car", ticket1);
+            Assert.Equal("", ticket1);
         }
 
         [Fact]
@@ -99,10 +98,9 @@ namespace ParkingLotTest
         {
             ParkingLot parkingLot = new ParkingLot();
             string ticket1 = parkingLot.Park("car1");
+            var expection = Assert.Throws<WrongTicketExecption>((() => parkingLot.fetch("")));
 
-            string car1 = parkingLot.fetch("");
-
-            Assert.Equal("Invalid ticket", car1);
+            Assert.Equal("Unrecognized parking ticket.", expection.Message);
         }
     }
 }

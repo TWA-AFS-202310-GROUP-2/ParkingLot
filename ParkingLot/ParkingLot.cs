@@ -14,19 +14,13 @@ namespace Parking
         public string fetch(string ticket)
         {
             string car;
-            if (string.IsNullOrEmpty(ticket))
+            if (!ticket2Car.ContainsKey(ticket)||string.IsNullOrEmpty(ticket))
             {
-                return "Invalid ticket";
+                throw new WrongTicketExecption("Unrecognized parking ticket.");
             }
-            if (ticket2Car.ContainsKey(ticket))
-            {
-                car = ticket2Car[ticket];
-                ticket2Car.Remove(ticket);
-            }
-            else
-            {
-                car = "No car";
-            }
+
+            car = ticket2Car[ticket];
+            ticket2Car.Remove(ticket);
             return car;
         }
 
@@ -34,12 +28,12 @@ namespace Parking
         {
             if (parkingCapacity == 0)
             {
-                return "No capacity";
+                throw new NoCapacityExecption("No available position");
             }
 
             if (string.IsNullOrEmpty(car)||ticket2Car.FirstOrDefault(tc => tc.Value == car).Key != null)
             {
-                return "Error car";
+                return "";
             }
             string ticket = "T-"+car;
             ticket2Car.Add(ticket,car);
