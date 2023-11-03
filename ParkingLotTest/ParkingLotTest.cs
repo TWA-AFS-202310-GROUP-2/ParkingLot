@@ -49,5 +49,23 @@ namespace ParkingLotTest
             string car1 = parkingLot.fetch(ticket1);
             Assert.Equal("No car", car1);
         }
+
+        [Fact]
+        public void Should_not_park_car_when_parkinglot_is_up_to_capacity()
+        {
+            ParkingLot parkingLot = new ParkingLot();
+            parkingLot.Park("car1");
+            parkingLot.Park("car2");
+            parkingLot.Park("car3");
+            parkingLot.Park("car4");
+            parkingLot.Park("car5");
+            parkingLot.Park("car6");
+            parkingLot.Park("car7");
+            parkingLot.Park("car8");
+            parkingLot.Park("car9");
+            parkingLot.Park("car10");
+            string ticket1 = parkingLot.Park("car11");
+            Assert.Equal("No capacity", ticket1);
+        }
     }
 }
