@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Parking
 {
@@ -13,6 +14,10 @@ namespace Parking
         public string fetch(string ticket)
         {
             string car;
+            if (string.IsNullOrEmpty(ticket))
+            {
+                return "Invalid ticket";
+            }
             if (ticket2Car.ContainsKey(ticket))
             {
                 car = ticket2Car[ticket];
@@ -30,6 +35,11 @@ namespace Parking
             if (parkingCapacity == 0)
             {
                 return "No capacity";
+            }
+
+            if (string.IsNullOrEmpty(car)||ticket2Car.FirstOrDefault(tc => tc.Value == car).Key != null)
+            {
+                return "Error car";
             }
             string ticket = "T-"+car;
             ticket2Car.Add(ticket,car);
