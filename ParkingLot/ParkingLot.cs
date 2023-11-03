@@ -52,5 +52,10 @@
 
             return ticketCarMap[ticket];
         }
+
+        public int GetAvailableSpaces()
+        {
+            return capacity - parkingCount;
+        }
     }
 }
