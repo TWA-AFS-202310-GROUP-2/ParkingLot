@@ -9,8 +9,9 @@ public class SmartParkingBoyTest
     public void Should_get_the_location_2_when_fetch_car_by_smartparkingboy()
     {
         var parkingBoy = new SmartParkingBoy(2);
-        parkingBoy.setParkingListCapacity(0,1);
-        parkingBoy.setParkingListCapacity(1,2);
+        parkingBoy.SetParkingListCapacity(0,1);
+        parkingBoy.SetParkingListCapacity(1,2);
+
         Ticket ticket = parkingBoy.Park("car");
 
         Assert.Equal(2, ticket.location);
@@ -20,8 +21,9 @@ public class SmartParkingBoyTest
     public void Should_get_the_location_2_1_2_when_fetch_car_by_foolparkingboy()
     {
         var parkingBoy = new SmartParkingBoy(2);
-        parkingBoy.setParkingListCapacity(0, 1);
-        parkingBoy.setParkingListCapacity(1, 2);
+        parkingBoy.SetParkingListCapacity(0, 1);
+        parkingBoy.SetParkingListCapacity(1, 2);
+
         Ticket ticket1 = parkingBoy.Park("car1");
         Ticket ticket2 = parkingBoy.Park("car2");
         Ticket ticket3 = parkingBoy.Park("car3");

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Parking;
 
-public class FoolParkingBoy
+public class FoolParkingBoy: IParking
 {
     private List<ParkingLot> _parkingLotList;
 
@@ -64,7 +64,7 @@ public class FoolParkingBoy
         return car;
     }
 
-    public void setParkingListCapacity(int index, int capacity)
+    public void SetParkingListCapacity(int index, int capacity)
     {
         _parkingLotList[index].ParkingCapacity=capacity;
     }

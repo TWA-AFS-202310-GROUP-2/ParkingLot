@@ -17,5 +17,8 @@
     &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_2_2_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_2_1_2_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.StragetyPattenTest.Should_get_the_location_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.StragetyPattenTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
