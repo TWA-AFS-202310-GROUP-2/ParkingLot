@@ -32,12 +32,6 @@ namespace ParkingLot
 
         public string Fetch(string ticket)
         {
-            //if (ticket2Car.ContainsKey(ticket))
-            //if (ticket == null)
-            //{
-            //    return null;
-            //}
-
             if (ticket == null || !ticket2Car.ContainsKey(ticket))
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
