@@ -1,0 +1,24 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0d8406e7_002D952b_002D4013_002D8be8_002Dacd8090655ef/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Should_get_the_same_car_when_fetch_car_by_ticket" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.ParkingLotTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.ParkingBoyTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2fa04bdc_002D514e_002D44dc_002Daecd_002D6631088cc3d7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ParkingBoyTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.ParkingBoyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest.Should_get_the_location_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest.Should_get_the_location_2_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest.Should_get_the_car_when_fetch_car_by_ticket_to_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest.Should_get_no_car_when_car_aleady_fetched_by_ticket&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest.Should_get_no_capacity_when_parkinglot_is_up_to_capacity&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.FoolParkingBoyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_2_2_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest.Should_get_the_location_2_1_2_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.SmartParkingBoyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.StragetyPattenTest.Should_get_the_location_1_when_fetch_car_by_foolparkingboy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A8ADF2B5-445D-4A86-8DBF-0350586E4EFC::net6.0::ParkingLotTest.StragetyPattenTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
