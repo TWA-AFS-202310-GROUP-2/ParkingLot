@@ -10,7 +10,7 @@
 
         public ParkingLot(int capacity)
         {
-            Capacity = capacity;
+            this.Capacity = capacity;
             ParkedCars = new Dictionary<Ticket, Car>();
         }
 

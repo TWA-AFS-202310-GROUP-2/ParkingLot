@@ -2,6 +2,7 @@
 {
     using ParkingLot;
     using System;
+    using System.Collections.Generic;
     using System.Net.Sockets;
     using Xunit;
     using Xunit.Sdk;
@@ -11,7 +12,14 @@
         [Fact]
         public void Should_return_parking_ticket_When_park_Given_parking_lot_and_car()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(10), new ParkingLot(20)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
+
             var car = new Car();
             var ticket = parkingBoy.Park(car);
 
@@ -21,7 +29,14 @@
         [Fact]
         public void Should_return_parked_car_When_fetch_Given_parking_lot_with_parked_car_and_parking_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(10), new ParkingLot(20)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
+
             var car = new Car();
             var ticket = parkingBoy.Park(car);
             var fetchedCar = parkingBoy.Fetch(ticket);
@@ -32,7 +47,13 @@
         [Fact]
         public void Should_return_two_parked_cars_When_fetch_Given_parking_lot_with_two_parked_cars_and_two_parking_tickets()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(10), new ParkingLot(20)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
 
             var car1 = new Car();
             var ticket1 = parkingBoy.Park(car1);
@@ -48,7 +69,14 @@
         [Fact]
         public void Should_return_error_message_When_fetch_Given_a_wrong_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(10), new ParkingLot(20)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
+
             var car = new Car();
             parkingBoy.Park(car);
             var wrongTicket = new Ticket();
@@ -60,7 +88,14 @@
         [Fact]
         public void Should_return_error_message_When_fetch_Given_used_a_ticket()
         {
-            var parkingBoy = new ParkingBoy();
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(10), new ParkingLot(20)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
+
             var car = new Car();
             var ticket = parkingBoy.Park(car);
             parkingBoy.Fetch(ticket); // Simulate fetching the car
@@ -72,12 +107,20 @@
         [Fact]
         public void Should_return_error_message_When_park_Given_a_full_parkingLot()
         {
-            var parkingLot = new ParkingLot(1); // Parking lot with capacity of 1
+            var parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(1), new ParkingLot(0)
+            };
+
+            var smartParkingStrategy = new SmartParkingStrategy();
+            var parkingBoy = new ParkingBoy(smartParkingStrategy, parkingLots);
+
             var car1 = new Car();
             var car2 = new Car();
-            parkingLot.Park(car1); // Park first car
 
-            NoPositionException exception = Assert.Throws<NoPositionException>(() => parkingLot.Park(car2)); // Attempt to fetch with the same ticket
+            parkingBoy.Park(car1); // Park first car
+
+            NoPositionException exception = Assert.Throws<NoPositionException>(() => parkingBoy.Park(car2)); // Attempt to fetch with the same ticket
 
             Assert.Equal("No available position.", exception.Message);
         }
