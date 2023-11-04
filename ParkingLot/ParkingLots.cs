@@ -66,11 +66,6 @@ namespace ParkingLot
             }
         }
 
-        //public string Park()
-        //{
-        //    return null;
-        //}
-
         public bool HasAvailableSpace()
         {
             return (this.capacity < this.maxCapacity) && (this.capacity > 0);
