@@ -88,9 +88,10 @@ namespace ParkingLotTest
             }
 
             //When
-            Ticket ticke1 = parkingLots.Park("Car 100");
+            Action action = () => parkingLots.Park("Car 100");
             //Then
-            Assert.Null(ticke1);
+            var exception = Assert.Throws<NoPositionException>(action);
+            Assert.Equal("No available position.", exception.Message);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ParkingLot
                 return ticket;
             }
 
-            return null;
+            throw new NoPositionException("No available position.");
         }
 
         public string Fetch(Ticket ticket)
