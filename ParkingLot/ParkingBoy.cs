@@ -31,13 +31,13 @@ namespace ParkingLot
 
             var ticket = new Ticket();
 
-            if (parkingLot1.ParkedCars.Count >= parkingLot1.Capacity)
+            if (parkingLot1.Capacity - parkingLot1.ParkedCars.Count >= parkingLot2.Capacity - parkingLot2.ParkedCars.Count)
             {
-                parkingLot2.ParkedCars.Add(ticket, car);
+                parkingLot1.ParkedCars.Add(ticket, car);
             }
             else
             {
-                parkingLot1.ParkedCars.Add(ticket, car);
+                parkingLot2.ParkedCars.Add(ticket, car);
             }
 
             return ticket;
@@ -54,7 +54,7 @@ namespace ParkingLot
             {
                 parkingLot1.ParkedCars.Remove(ticket);
             }
-            else
+            else if (parkingLot2.ParkedCars.TryGetValue(ticket, out car))
             {
                 parkingLot2.ParkedCars.Remove(ticket);
             }
