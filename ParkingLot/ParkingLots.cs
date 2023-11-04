@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,29 +9,54 @@ namespace ParkingLot
 {
     public class ParkingLots
     {
-        private IDictionary<string, string> carTickets = new Dictionary<string, string>();
-        public string Park(string car)
+        private IDictionary<Ticket, string> carTickets = new Dictionary<Ticket, string>();
+        public Ticket Park(string car)
         {
-            string ticketNumber = Guid.NewGuid().ToString();
-            string ticketName = $"Ticket {ticketNumber}";
-            this.carTickets.Add(ticketName, car);
+            Ticket ticket = new Ticket
+            {
+                IsUsed = false,
+                TicketName = Guid.NewGuid().ToString(),
+            };
+            this.carTickets.Add(ticket, car);
 
-            return ticketName;
+            return ticket;
         }
 
-        public string Fetch(string ticket)
+        public string Fetch(Ticket ticket)
         {
-            if (this.carTickets.ContainsKey(ticket))
+            if (IsValid(ticket) == "correct")
             {
-                string car = carTickets[ticket];
-                return car;
+                ticket.IsUsed = true; // 标记票为已使用
+                return carTickets[ticket];
             }
-            else if (ticket == string.Empty)
+            else
+            {
+                return IsValid(ticket);
+            }
+        }
+
+        private string IsValid(Ticket ticket)
+        {
+            if (ticket.TicketName == null)
             {
                 return "This ticket does not exist";
             }
+            else if (!this.carTickets.ContainsKey(ticket))
+            {
+                return "This ticket is wrong";
+            }
+            else if (ticket.IsUsed == true)
+            {
+                return "This ticket has been used";
+            }
 
-            return "This ticket is wrong";
+            return "correct";
+        }
+
+        public class Ticket
+        {
+            public string TicketName { get; set; }
+            public bool IsUsed { get; set; }
         }
     }
 }

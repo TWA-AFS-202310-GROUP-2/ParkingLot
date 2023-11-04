@@ -2,6 +2,7 @@ namespace ParkingLotTest
 {
     using ParkingLot;
     using Xunit;
+    using static ParkingLot.ParkingLots;
 
     public class ParkingLotsTest
     {
@@ -10,7 +11,7 @@ namespace ParkingLotTest
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
-            string ticket = parkingLots.Park("Car test");
+            Ticket ticket = parkingLots.Park("Car test");
             //when
             string car = parkingLots.Fetch(ticket);
             //then
@@ -22,8 +23,8 @@ namespace ParkingLotTest
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
-            string ticke1 = parkingLots.Park("Car 1");
-            string ticke2 = parkingLots.Park("Car 0000");
+            Ticket ticke1 = parkingLots.Park("Car 1");
+            Ticket ticke2 = parkingLots.Park("Car 0000");
             //When
             string car1 = parkingLots.Fetch(ticke1);
             string car2 = parkingLots.Fetch(ticke2);
@@ -37,10 +38,10 @@ namespace ParkingLotTest
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
-            string ticke1 = parkingLots.Park("Car 1");
-            string givenTickets = "Ticket 1";
+            parkingLots.Park("Car 1");
+            Ticket givenTicket = new Ticket { TicketName = "Ticket 1" };
             //When
-            string car1 = parkingLots.Fetch(givenTickets);
+            string car1 = parkingLots.Fetch(givenTicket);
             //Then
             Assert.Equal("This ticket is wrong", car1);
         }
@@ -50,12 +51,25 @@ namespace ParkingLotTest
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
-            string ticke1 = parkingLots.Park("Car 1");
-            string givenTickets = string.Empty;
+            parkingLots.Park("Car 1");
+            Ticket givenTicket = new Ticket { TicketName = null };
             //When
-            string car1 = parkingLots.Fetch(givenTickets);
+            string car1 = parkingLots.Fetch(givenTicket);
             //Then
             Assert.Equal("This ticket does not exist", car1);
+        }
+
+        [Fact]
+        public void Should_return_no_cars_When_fetch_cars_Given_an_used_ticket()
+        {
+            //Given
+            ParkingLots parkingLots = new ParkingLots();
+            Ticket ticke1 = parkingLots.Park("Car 1");
+            parkingLots.Fetch(ticke1);
+            //When
+            string sameCar = parkingLots.Fetch(ticke1);
+            //Then
+            Assert.Equal("This ticket has been used", sameCar);
         }
     }
 }
