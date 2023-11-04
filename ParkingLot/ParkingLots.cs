@@ -33,7 +33,7 @@ namespace ParkingLot
         {
             if (IsValid(ticket) == "correct")
             {
-                ticket.IsUsed = true; // 标记票为已使用
+                ticket.IsUsed = true;
                 return carTickets[ticket];
             }
             else

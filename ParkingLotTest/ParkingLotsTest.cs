@@ -1,11 +1,10 @@
+using ParkingLot;
+using System;
+using Xunit;
+using static ParkingLot.ParkingLots;
+
 namespace ParkingLotTest
 {
-    using ParkingLot;
-    using System;
-    using Xunit;
-    using static ParkingLot.ParkingLots;
-    using static System.Collections.Specialized.BitVector32;
-
     public class ParkingLotsTest
     {
         [Fact]
