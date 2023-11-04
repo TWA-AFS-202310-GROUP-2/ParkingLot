@@ -11,17 +11,6 @@ namespace ParkingLot
     public class SmartParkingBoy
     {
         private List<ParkingLots> parkingLots;
-        private Dictionary<ParkingLots, Dictionary<Ticket, string>> globalDictionary;
-
-        public SmartParkingBoy(List<ParkingLots> parkingLots)
-        {
-            this.parkingLots = parkingLots;
-            this.globalDictionary = new Dictionary<ParkingLots, Dictionary<Ticket, string>>();
-            foreach (var lot in parkingLots)
-            {
-                globalDictionary[lot] = new Dictionary<Ticket, string>();
-            }
-        }
 
         public Ticket Park(List<ParkingLots> parkingLots, string car)
         {
