@@ -8,12 +8,10 @@ using static ParkingLot.ParkingLots;
 
 namespace ParkingLot
 {
-    public class ParkingBoy
+    public class ParkingBoy : ParkingStrategy
     {
-        private List<ParkingLots> parkingLots;
-        public ParkingBoy(List<ParkingLots> parkingLots)
+        public ParkingBoy(List<ParkingLots> parkingLots) : base(parkingLots)
         {
-            this.parkingLots = parkingLots;
         }
 
         public Ticket Park(List<ParkingLots> parkingLots, string car)
@@ -28,13 +26,7 @@ namespace ParkingLot
 
         public string Fetch(List<ParkingLots> parkingLots, Ticket ticket)
         {
-            var parkingLotWithTicket = parkingLots.FirstOrDefault(lot => lot.HasTicket(ticket));
-            if (parkingLotWithTicket == null)
-            {
-                throw new WrongTicketException("Unrecognized parking ticket.");
-            }
-
-            return parkingLotWithTicket.Fetch(ticket);
+            return Fetch(parkingLots, ticket);
         }
     }
 }
