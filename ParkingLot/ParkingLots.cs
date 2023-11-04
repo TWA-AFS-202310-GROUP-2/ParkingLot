@@ -10,16 +10,22 @@ namespace ParkingLot
     public class ParkingLots
     {
         private IDictionary<Ticket, string> carTickets = new Dictionary<Ticket, string>();
+        private int capacity = 0;
         public Ticket Park(string car)
         {
-            Ticket ticket = new Ticket
+            if (capacity < 10)
             {
-                IsUsed = false,
-                TicketName = Guid.NewGuid().ToString(),
-            };
-            this.carTickets.Add(ticket, car);
+                Ticket ticket = new Ticket
+                {
+                    IsUsed = false,
+                    TicketName = Guid.NewGuid().ToString(),
+                };
+                this.carTickets.Add(ticket, car);
+                capacity++;
+                return ticket;
+            }
 
-            return ticket;
+            return null;
         }
 
         public string Fetch(Ticket ticket)

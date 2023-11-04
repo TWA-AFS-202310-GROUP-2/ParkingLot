@@ -71,5 +71,21 @@ namespace ParkingLotTest
             //Then
             Assert.Equal("This ticket has been used", sameCar);
         }
+
+        [Fact]
+        public void Should_return_no_ticket_When_park_cars_Given_more_than_10_cars()
+        {
+            //Given
+            ParkingLots parkingLots = new ParkingLots();
+            for (int i = 0; i < 10; i++)
+            {
+                parkingLots.Park($"Car {i}");
+            }
+
+            //When
+            Ticket ticke1 = parkingLots.Park("Car 100");
+            //Then
+            Assert.Null(ticke1);
+        }
     }
 }
