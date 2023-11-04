@@ -25,8 +25,12 @@ namespace ParkingLot
                 string car = carTickets[ticket];
                 return car;
             }
+            else if (ticket == string.Empty)
+            {
+                return "This ticket does not exist";
+            }
 
-            return "wrong ticket";
+            return "This ticket is wrong";
         }
     }
 }
