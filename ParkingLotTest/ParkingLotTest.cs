@@ -13,15 +13,15 @@ namespace ParkingLotTest
     {
         // User story 1: AC 1
         [Fact]
-        public void Should_get_the_same_car_when_fetch_cat_by_ticket()
+        public void Should_get_the_same_car_when_fetch_car_given_ticket()
         {
             //Given
             ParkingLots parkingLot = new ParkingLots();
-            string ticket = parkingLot.Park("car");
+            string ticket = parkingLot.Park("car_temp");
             //When
             string car = parkingLot.Fetch(ticket);
             //Then
-            Assert.Equal("car", car);
+            Assert.Equal("car_temp", car);
         }
 
         // User Story 1: AC2
@@ -36,6 +36,7 @@ namespace ParkingLotTest
 
             Assert.Equal("car1", car1);
         }
+
         [Fact]
         public void Should_get_correct_car_when_fetch_two_car_given_each_corresponding_ticket()
         {
@@ -77,6 +78,7 @@ namespace ParkingLotTest
             parkingLot.Fetch(ticket1);
 
             WrongTicketException wrongTicketException = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(ticket1));
+            //Then
             Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
 

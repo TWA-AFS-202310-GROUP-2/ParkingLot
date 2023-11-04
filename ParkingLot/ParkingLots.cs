@@ -1,35 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ParkingLot
 {
-    public class ParkingLots
+    public class ParkingLots : IParkingLot
     {
         private string? car;
         private string? ticket;
         private int capacity = 10;
+        private int maxCapacity = 10;
         private Dictionary<string?, string?> ticket2Car = new Dictionary<string?, string?>();
         public ParkingLots(int capacity)
         {
             this.capacity = capacity;
+            ticket2Car = new Dictionary<string?, string?>();
         }
 
         public ParkingLots()
         {
+            ticket2Car = new Dictionary<string?, string?>();
         }
 
         public string Fetch(string ticket)
         {
             //if (ticket2Car.ContainsKey(ticket))
-            if (ticket == null)
-            {
-                return null;
-            }
+            //if (ticket == null)
+            //{
+            //    return null;
+            //}
 
-            if (!ticket2Car.ContainsKey(ticket))
+            if (ticket == null || !ticket2Car.ContainsKey(ticket))
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
             }
@@ -57,9 +61,14 @@ namespace ParkingLot
             }
         }
 
-        public string Park()
+        //public string Park()
+        //{
+        //    return null;
+        //}
+
+        public bool HasAvailableSpace()
         {
-            return null;
+            return capacity < maxCapacity;
         }
     }
 }

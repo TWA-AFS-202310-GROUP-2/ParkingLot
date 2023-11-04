@@ -38,7 +38,7 @@ namespace ParkingLotTest
         // User Story 2: AC 2
         [Theory]
         [InlineData(0)]
-        public void Should_no_park_throw_error_msg_when_unavailable_position_given_capacity(int capacity)
+        public void Should_throw_error_msg_when_unavailable_position_given_capacity(int capacity)
         {
             //Given
             ParkingLots parkingLot = new ParkingLots(capacity);
