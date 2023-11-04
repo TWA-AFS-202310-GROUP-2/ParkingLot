@@ -16,9 +16,14 @@
 
         public Ticket Park(Car car)
         {
-            if (parkedCars.Count >= capacity || car == null)
+            if (car == null)
             {
                 return null;
+            }
+
+            if (parkedCars.Count >= capacity)
+            {
+                throw new NoPositionException("No available position.");
             }
 
             var ticket = new Ticket();
@@ -30,7 +35,7 @@
         {
             if (ticket == null || !parkedCars.TryGetValue(ticket, out var car))
             {
-                return null;
+                throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
             parkedCars.Remove(ticket);

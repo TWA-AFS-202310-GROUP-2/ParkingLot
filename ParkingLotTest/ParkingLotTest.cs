@@ -1,7 +1,10 @@
 namespace ParkingLotTest
 {
     using ParkingLot;
+    using System;
+    using System.Net.Sockets;
     using Xunit;
+    using Xunit.Sdk;
 
     public class ParkingLotTest
     {
@@ -43,39 +46,40 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_null_When_fetch_Given_a_wrong_ticket()
+        public void Should_return_error_message_When_fetch_Given_a_wrong_ticket()
         {
             var parkingLot = new ParkingLot(10);
             var car = new Car();
             parkingLot.Park(car);
             var wrongTicket = new Ticket();
-            var fetchedCar = parkingLot.Fetch(wrongTicket);
+            WrongTicketException exception = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(wrongTicket));
 
-            Assert.Null(fetchedCar);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
-        public void Should_return_null_When_fetch_Given_used_a_ticket()
+        public void Should_return_error_message_When_fetch_Given_used_a_ticket()
         {
             var parkingLot = new ParkingLot(10);
             var car = new Car();
             var ticket = parkingLot.Park(car);
             parkingLot.Fetch(ticket); // Simulate fetching the car
-            var fetchedCar = parkingLot.Fetch(ticket); // Attempt to fetch with the same ticket
+            WrongTicketException exception = Assert.Throws<WrongTicketException>(() => parkingLot.Fetch(ticket)); // Attempt to fetch with the same ticket
 
-            Assert.Null(fetchedCar);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
-        public void Should_return_null_When_park_Given_a_full_parkingLot()
+        public void Should_return_error_message_When_park_Given_a_full_parkingLot()
         {
             var parkingLot = new ParkingLot(1); // Parking lot with capacity of 1
             var car1 = new Car();
             var car2 = new Car();
             parkingLot.Park(car1); // Park first car
-            var ticket = parkingLot.Park(car2); // Attempt to park another car
 
-            Assert.Null(ticket);
+            NoPositionException exception = Assert.Throws<NoPositionException>(() => parkingLot.Park(car2)); // Attempt to fetch with the same ticket
+
+            Assert.Equal("No available position.", exception.Message);
         }
     }
 }
