@@ -54,8 +54,8 @@ namespace ParkingLotTest
 
         [Theory]
         [InlineData(null)]
-        [InlineData("123")]
-        public void Should_get_no_car_when_fetch_car_given_wrong_or_null_ticket_us3(string wrongticket)
+        [InlineData("5678")]
+        public void Should_throw_err_msg_when_fetch_car_given_wrong_or_null_ticket_us3(string wrongticket)
         {
             //Given
             List<ParkingLots> lots = [new ParkingLots(9)];
@@ -67,12 +67,12 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_get_no_car_when_fetch_car_given_used_ticket_us3()
+        public void Should_throw_err_msg_when_fetch_car_given_used_ticket_us3()
         {
             //Given
             List<ParkingLots> lots = [new ParkingLots(9)];
             ParkingBoy parkingBoy = new ParkingBoy(new StandardParkingStrategy(), lots);
-            string ticket1 = parkingBoy.ParkCar("car1");
+            string ticket1 = parkingBoy.ParkCar("car_us3");
             //When
             parkingBoy.FetchCar(ticket1);
 
@@ -82,13 +82,13 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_not_get_ticket_when_park_given_parkinglot_capacity_us3()
+        public void Should_throw_err_msg_when_park_given_full_parkinglot_capacity_us3()
         {
             // Given
             List<ParkingLots> lots = [new ParkingLots(0)];
             ParkingBoy parkingBoy = new ParkingBoy(new StandardParkingStrategy(), lots);
             // When
-            UnAvailablePositionException unavailablePositionException = Assert.Throws<UnAvailablePositionException>(() => parkingBoy.ParkCar("car"));
+            UnAvailablePositionException unavailablePositionException = Assert.Throws<UnAvailablePositionException>(() => parkingBoy.ParkCar("car_unavailable_position"));
             // Then
             Assert.Equal("No available position.", unavailablePositionException.Message);
         }

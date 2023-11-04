@@ -8,14 +8,21 @@ namespace ParkingLot
 {
     public class StandardParkingStrategy : IParkingStrategy
     {
+        private int count = 0;
         public string ParkCar(List<ParkingLots> parkingLots, string car)
         {
             foreach (var lot in parkingLots)
             {
+                count += lot.PositionCapacity();
                 if (lot.HasAvailableSpace())
                 {
                     return lot.Park(car);
                 }
+            }
+
+            if (count == 0)
+            {
+                throw new UnAvailablePositionException("No available position.");
             }
 
             return null;

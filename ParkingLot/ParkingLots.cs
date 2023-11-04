@@ -25,6 +25,11 @@ namespace ParkingLot
             ticket2Car = new Dictionary<string?, string?>();
         }
 
+        public int PositionCapacity()
+        {
+            return this.capacity;
+        }
+
         public string Fetch(string ticket)
         {
             //if (ticket2Car.ContainsKey(ticket))
@@ -40,16 +45,16 @@ namespace ParkingLot
 
             this.car = ticket2Car[ticket];
             ticket2Car.Remove(ticket);
-            capacity++;
+            this.capacity++;
             return this.car;
         }
 
         public string Park(string car)
         {
             this.ticket = "T-" + car;
-            capacity--;
+            this.capacity--;
 
-            if (capacity <= 0)
+            if (this.capacity < 0)
             {
                 throw new UnAvailablePositionException("No available position.");
             }
@@ -68,7 +73,7 @@ namespace ParkingLot
 
         public bool HasAvailableSpace()
         {
-            return capacity < maxCapacity;
+            return (this.capacity < this.maxCapacity) && (this.capacity > 0);
         }
     }
 }
