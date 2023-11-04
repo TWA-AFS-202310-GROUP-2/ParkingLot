@@ -12,6 +12,16 @@ namespace ParkingLot
         private readonly int maxcapacity = 10;
         private IDictionary<Ticket, string> carTickets = new Dictionary<Ticket, string>();
         private int capacity = 0;
+
+        public ParkingLots(int v)
+        {
+            this.maxcapacity = v;
+        }
+
+        public ParkingLots()
+        {
+        }
+
         public Ticket Park(string car)
         {
             if (capacity < maxcapacity)
@@ -40,6 +50,16 @@ namespace ParkingLot
             {
                 return IsValid(ticket);
             }
+        }
+
+        public bool HasPosition()
+        {
+            if (capacity < maxcapacity)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private string IsValid(Ticket ticket)
