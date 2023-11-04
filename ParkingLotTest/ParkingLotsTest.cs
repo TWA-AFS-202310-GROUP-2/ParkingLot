@@ -1,8 +1,10 @@
 namespace ParkingLotTest
 {
     using ParkingLot;
+    using System;
     using Xunit;
     using static ParkingLot.ParkingLots;
+    using static System.Collections.Specialized.BitVector32;
 
     public class ParkingLotsTest
     {
@@ -41,9 +43,10 @@ namespace ParkingLotTest
             parkingLots.Park("Car 1");
             Ticket givenTicket = new Ticket { TicketName = "Ticket 1" };
             //When
-            string car1 = parkingLots.Fetch(givenTicket);
+            Action action = () => parkingLots.Fetch(givenTicket);
             //Then
-            Assert.Equal("This ticket is wrong", car1);
+            var exception = Assert.Throws<WrongTicketException>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
@@ -54,9 +57,10 @@ namespace ParkingLotTest
             parkingLots.Park("Car 1");
             Ticket givenTicket = new Ticket { TicketName = null };
             //When
-            string car1 = parkingLots.Fetch(givenTicket);
+            Action action = () => parkingLots.Fetch(givenTicket);
             //Then
-            Assert.Equal("This ticket does not exist", car1);
+            var exception = Assert.Throws<WrongTicketException>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
@@ -67,9 +71,10 @@ namespace ParkingLotTest
             Ticket ticke1 = parkingLots.Park("Car 1");
             parkingLots.Fetch(ticke1);
             //When
-            string sameCar = parkingLots.Fetch(ticke1);
+            Action action = () => parkingLots.Fetch(ticke1);
             //Then
-            Assert.Equal("This ticket has been used", sameCar);
+            var exception = Assert.Throws<WrongTicketException>(action);
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]

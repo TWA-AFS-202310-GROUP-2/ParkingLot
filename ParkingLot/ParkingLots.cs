@@ -9,11 +9,12 @@ namespace ParkingLot
 {
     public class ParkingLots
     {
+        private readonly int maxcapacity = 10;
         private IDictionary<Ticket, string> carTickets = new Dictionary<Ticket, string>();
         private int capacity = 0;
         public Ticket Park(string car)
         {
-            if (capacity < 10)
+            if (capacity < maxcapacity)
             {
                 Ticket ticket = new Ticket
                 {
@@ -43,17 +44,9 @@ namespace ParkingLot
 
         private string IsValid(Ticket ticket)
         {
-            if (ticket.TicketName == null)
+            if (ticket.TicketName == null || !this.carTickets.ContainsKey(ticket) || ticket.IsUsed == true)
             {
-                return "This ticket does not exist";
-            }
-            else if (!this.carTickets.ContainsKey(ticket))
-            {
-                return "This ticket is wrong";
-            }
-            else if (ticket.IsUsed == true)
-            {
-                return "This ticket has been used";
+                throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
             return "correct";
