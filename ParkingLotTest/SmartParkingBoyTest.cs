@@ -134,7 +134,7 @@ namespace ParkingLotTest
         }
 
         [Theory]
-        [InlineData(1, 2)]
+        [InlineData(5, 2)]
         public void Should_SmartParkingBoy_park_in_more_empty_positions_When_park_cars(int lot1, int lot2)
         {
             //Given
@@ -145,18 +145,46 @@ namespace ParkingLotTest
             };
             SmartParkingBoy smartparkingBoy = new SmartParkingBoy(parkingLots);
             List<string> paringOrder = new List<string>();
+            //预计的Parking order,相同数量时默认数量多的
+            List<string> expectParkingOrder = new List<string>
+            {
+                "lot1", "lot1", "lot1", "lot1", "lot2", "lot1", "lot2",
+            };
+            //When
             for (int i = 0; i < lot1 + lot2; i++)
             {
                 Ticket ticket = smartparkingBoy.Park(parkingLots, $"Car {i}");
                 paringOrder.Add(ticket.PakingLotName);
             }
 
+            //Then
+            Assert.Equal(expectParkingOrder, paringOrder);
+        }
+
+        [Theory]
+        [InlineData(3, 3)]
+        public void Should_SmartParkingBoy_park_in_more_empty_positions_When_capacity_is_equal(int lot1, int lot2)
+        {
+            //Given
+            List<ParkingLots> parkingLots = new List<ParkingLots>
+            {
+                new ParkingLots(lot1) { Number = "lot1" },
+                new ParkingLots(lot2) { Number = "lot2" },
+            };
+            SmartParkingBoy smartparkingBoy = new SmartParkingBoy(parkingLots);
+            List<string> paringOrder = new List<string>();
+            //capacity相同数量时,默认第一个
             List<string> expectParkingOrder = new List<string>
             {
-                "lot2", "lot1", "lot2",
+                "lot1", "lot2", "lot1", "lot2", "lot1", "lot2",
             };
-
             //When
+            for (int i = 0; i < lot1 + lot2; i++)
+            {
+                Ticket ticket = smartparkingBoy.Park(parkingLots, $"Car {i}");
+                paringOrder.Add(ticket.PakingLotName);
+            }
+
             //Then
             Assert.Equal(expectParkingOrder, paringOrder);
         }
