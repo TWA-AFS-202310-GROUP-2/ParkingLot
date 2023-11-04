@@ -5,13 +5,13 @@
 
     public class ParkingLot
     {
-        private readonly int capacity;
-        private readonly Dictionary<Ticket, Car> parkedCars;
+        public readonly int Capacity;
+        public readonly Dictionary<Ticket, Car> ParkedCars;
 
         public ParkingLot(int capacity)
         {
-            this.capacity = capacity;
-            parkedCars = new Dictionary<Ticket, Car>();
+            this.Capacity = capacity;
+            ParkedCars = new Dictionary<Ticket, Car>();
         }
 
         public Ticket Park(Car car)
@@ -21,24 +21,24 @@
                 return null;
             }
 
-            if (parkedCars.Count >= capacity)
+            if (ParkedCars.Count >= Capacity)
             {
                 throw new NoPositionException("No available position.");
             }
 
             var ticket = new Ticket();
-            parkedCars.Add(ticket, car);
+            ParkedCars.Add(ticket, car);
             return ticket;
         }
 
         public Car Fetch(Ticket ticket)
         {
-            if (ticket == null || !parkedCars.TryGetValue(ticket, out var car))
+            if (ticket == null || !ParkedCars.TryGetValue(ticket, out var car))
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
-            parkedCars.Remove(ticket);
+            ParkedCars.Remove(ticket);
             return car;
         }
     }
