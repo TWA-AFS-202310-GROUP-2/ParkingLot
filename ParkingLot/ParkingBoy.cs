@@ -8,10 +8,13 @@ namespace ParkingLot
 {
     public class ParkingBoy
     {
-        private ParkingLot parkingLot;
+        private ParkingLot parkingLot1;
+        private ParkingLot parkingLot2;
+
         public ParkingBoy()
         {
-            parkingLot = new ParkingLot(10);
+            parkingLot1 = new ParkingLot(10);
+            parkingLot2 = new ParkingLot(20);
         }
 
         public Ticket Park(Car car)
@@ -21,24 +24,41 @@ namespace ParkingLot
                 return null;
             }
 
-            if (parkingLot.ParkedCars.Count >= parkingLot.Capacity)
+            if (parkingLot1.ParkedCars.Count + parkingLot2.ParkedCars.Count >= parkingLot1.Capacity + parkingLot2.Capacity)
             {
                 throw new NoPositionException("No available position.");
             }
 
             var ticket = new Ticket();
-            parkingLot.ParkedCars.Add(ticket, car);
+
+            if (parkingLot1.ParkedCars.Count >= parkingLot1.Capacity)
+            {
+                parkingLot2.ParkedCars.Add(ticket, car);
+            }
+            else
+            {
+                parkingLot1.ParkedCars.Add(ticket, car);
+            }
+
             return ticket;
         }
 
         public Car Fetch(Ticket ticket)
         {
-            if (ticket == null || !parkingLot.ParkedCars.TryGetValue(ticket, out var car))
+            if (ticket == null || (!parkingLot1.ParkedCars.TryGetValue(ticket, out var car) && !parkingLot2.ParkedCars.TryGetValue(ticket, out car)))
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
-            parkingLot.ParkedCars.Remove(ticket);
+            if (parkingLot1.ParkedCars.TryGetValue(ticket, out car))
+            {
+                parkingLot1.ParkedCars.Remove(ticket);
+            }
+            else
+            {
+                parkingLot2.ParkedCars.Remove(ticket);
+            }
+
             return car;
         }
     }
