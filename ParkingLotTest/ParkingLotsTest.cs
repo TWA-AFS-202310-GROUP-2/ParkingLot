@@ -36,7 +36,7 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_no_cars_When_fetch_cars_Given_wrong_tickets()
+        public void Should_throw_WrongTicketException_When_fetch_cars_Given_wrong_tickets()
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
@@ -50,7 +50,7 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_no_cars_When_fetch_cars_Given_null_tickets()
+        public void Should_throw_WrongTicketException_When_fetch_cars_Given_null_tickets()
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
@@ -64,7 +64,7 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_no_cars_When_fetch_cars_Given_an_used_ticket()
+        public void Should_throw_WrongTicketException_When_fetch_cars_Given_an_used_ticket()
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
@@ -78,7 +78,7 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_no_ticket_When_park_cars_Given_more_than_10_cars()
+        public void Should_throw_NoPositionException_When_park_cars_Given_more_than_10_cars()
         {
             //Given
             ParkingLots parkingLots = new ParkingLots();
