@@ -8,10 +8,9 @@ using static ParkingLot.ParkingLots;
 
 namespace ParkingLot
 {
-    public class ParkingBoy : ParkingStrategy
+    public interface IParkingStrategy
     {
-        public ParkingBoy(List<ParkingLots> parkingLots) : base(parkingLots)
-        {
-        }
+        Ticket Park(List<ParkingLots> parkingLots, string car);
+        string Fetch(List<ParkingLots> parkingLots, Ticket ticket);
     }
 }

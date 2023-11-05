@@ -16,13 +16,8 @@ namespace ParkingLot
 
         public override Ticket Park(List<ParkingLots> parkingLots, string car)
         {
-            var lotWithMostSpace = parkingLots.OrderByDescending(lot => lot.RemainingParking).FirstOrDefault();
-
-            if (lotWithMostSpace == null)
-            {
-                throw new NoPositionException("No available position.");
-            }
-
+            var lotWithMostSpace = parkingLots.OrderByDescending(lot => lot.RemainingParking).FirstOrDefault()
+                ?? throw new NoPositionException("No available position.");
             Ticket ticket = lotWithMostSpace.Park(car);
             ticket.PakingLotName = lotWithMostSpace.Number;
             return ticket;
