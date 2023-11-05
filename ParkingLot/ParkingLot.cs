@@ -36,33 +36,10 @@ namespace ParkingLot
             this.parkedCars.Remove(ticket);
             return car;
         }
-    }
 
-    public class Car
-    {
-    }
-
-    public class Ticket
-    {
-        public Ticket()
+        public bool HasAvailablePosition()
         {
-            Id = Guid.NewGuid();
-        }
-
-        public Guid Id { get; private set; }
-    }
-
-    public class UnrecognizedTicketException : Exception
-    {
-        public UnrecognizedTicketException() : base("Unrecognized parking ticket.")
-        {
-        }
-    }
-
-    public class NoAvailablePositionException : Exception
-    {
-        public NoAvailablePositionException() : base("No available position.")
-        {
+            return this.parkedCars.Count < this.capacity;
         }
     }
 }
