@@ -5,19 +5,27 @@ namespace ParkingLot
 {
     public class ParkingBoy
     {
-        private readonly List<ParkingLot> parkingLots;
+        private readonly IEnumerable<ParkingLot> parkingLots;
+        private IParkingStrategy parkingStrategy;
+        public ParkingBoy(ParkingLot parkingLot)
+        {
+            this.parkingLots = new List<ParkingLot> { parkingLot };
+            this.parkingStrategy = new StandardParkingStrategy();
+        }
 
         public ParkingBoy(IEnumerable<ParkingLot> parkingLots)
         {
             this.parkingLots = parkingLots.ToList();
+            this.parkingStrategy = new StandardParkingStrategy();
         }
 
-        public ParkingBoy(ParkingLot parkingLot)
+        public ParkingBoy(IEnumerable<ParkingLot> parkingLots, IParkingStrategy parkingStrategy)
         {
-            this.parkingLots = new List<ParkingLot> { parkingLot };
+            this.parkingLots = parkingLots;
+            this.parkingStrategy = parkingStrategy;
         }
 
-        public List<ParkingLot> ParkingLots
+        protected IEnumerable<ParkingLot> ParkingLots
         {
              get
              {
@@ -25,36 +33,19 @@ namespace ParkingLot
              }
         }
 
-        protected List<ParkingLot> ParkingLot { get; set; }
-
         public Ticket Park(Car car)
         {
-            foreach (var parkingLot in parkingLots)
-            {
-                if (parkingLot.HasAvailablePosition())
-                {
-                    return parkingLot.Park(car);
-                }
-            }
-
-            throw new NoAvailablePositionException();
+            return parkingStrategy.Park(parkingLots, car);
         }
 
         public Car Fetch(Ticket ticket)
         {
-            foreach (var parkingLot in parkingLots)
-            {
-                try
-                {
-                    return parkingLot.Fetch(ticket);
-                }
-                catch (UnrecognizedTicketException)
-                {
-                    // Continue checking the next parking lot
-                }
-            }
+            return parkingStrategy.Fetch(parkingLots, ticket);
+        }
 
-            throw new UnrecognizedTicketException();
+        public void SetParkingStrategy(IParkingStrategy newStrategy)
+        {
+            this.parkingStrategy = newStrategy;
         }
     }
 }
