@@ -14,16 +14,6 @@ namespace ParkingLot
         {
         }
 
-        public Ticket Park(List<ParkingLots> parkingLots, string car)
-        {
-            foreach (var lot in parkingLots.Where(lot => lot.HasPosition()))
-            {
-                return lot.Park(car);
-            }
-
-            throw new NoPositionException("No available position.");
-        }
-
         public string Fetch(List<ParkingLots> parkingLots, Ticket ticket)
         {
             return Fetch(parkingLots, ticket);

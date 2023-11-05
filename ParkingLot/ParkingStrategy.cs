@@ -22,5 +22,15 @@ namespace ParkingLot
 
             return parkingLotWithTicket.Fetch(ticket);
         }
+
+        public virtual Ticket Park(List<ParkingLots> parkingLots, string car)
+        {
+            foreach (var lot in parkingLots.Where(lot => lot.HasPosition()))
+            {
+                return lot.Park(car);
+            }
+
+            throw new NoPositionException("No available position.");
+        }
     }
 }

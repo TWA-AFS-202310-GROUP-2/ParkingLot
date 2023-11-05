@@ -39,12 +39,7 @@ namespace ParkingLot
         {
             if (capacity < maxcapacity)
             {
-                Ticket ticket = new Ticket
-                {
-                    IsUsed = false,
-                    TicketName = Guid.NewGuid().ToString(),
-                };
-                this.carTickets.Add(ticket, car);
+                Ticket ticket = GenerateTicket(car);
                 capacity++;
                 remainingParking--;
                 return ticket;
@@ -66,17 +61,23 @@ namespace ParkingLot
 
         public bool HasPosition()
         {
-            if (capacity < maxcapacity)
-            {
-                return true;
-            }
-
-            return false;
+            return capacity < maxcapacity;
         }
 
         public bool HasTicket(Ticket ticket)
         {
             return carTickets.ContainsKey(ticket);
+        }
+
+        private Ticket GenerateTicket(string car)
+        {
+            Ticket ticket = new Ticket
+            {
+                IsUsed = false,
+                TicketName = Guid.NewGuid().ToString(),
+            };
+            this.carTickets.Add(ticket, car);
+            return ticket;
         }
 
         private string IsValid(Ticket ticket)

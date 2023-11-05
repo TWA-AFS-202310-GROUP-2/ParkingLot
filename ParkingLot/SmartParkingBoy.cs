@@ -14,7 +14,7 @@ namespace ParkingLot
         {
         }
 
-        public Ticket Park(List<ParkingLots> parkingLots, string car)
+        public override Ticket Park(List<ParkingLots> parkingLots, string car)
         {
             var lotWithMostSpace = parkingLots.OrderByDescending(lot => lot.RemainingParking).FirstOrDefault();
 
@@ -26,11 +26,6 @@ namespace ParkingLot
             Ticket ticket = lotWithMostSpace.Park(car);
             ticket.PakingLotName = lotWithMostSpace.Number;
             return ticket;
-        }
-
-        public string Fetch(List<ParkingLots> parkingLots, Ticket ticket)
-        {
-            return Fetch(parkingLots, ticket);
         }
     }
 }
