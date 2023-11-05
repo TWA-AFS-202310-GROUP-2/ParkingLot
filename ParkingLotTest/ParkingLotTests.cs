@@ -39,36 +39,39 @@ namespace ParkingLotTests
         }
 
         [Fact]
-        public void FetchCar_WithWrongTicket_ReturnsNull()
+        public void FetchCar_WithWrongTicket_ThrowsUnrecognizedTicketException()
         {
             var parkingLot = new ParkingLot.ParkingLot(10);
             var car = new Car();
             parkingLot.Park(car);
             var wrongTicket = new Ticket();
-            var fetchedCar = parkingLot.Fetch(wrongTicket);
-            Assert.Null(fetchedCar);
+
+            var exception = Assert.Throws<UnrecognizedTicketException>(() => parkingLot.Fetch(wrongTicket));
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
-        public void FetchCar_WithUsedTicket_ReturnsNull()
+        public void FetchCar_WithUsedTicket_ThrowsUnrecognizedTicketException()
         {
             var parkingLot = new ParkingLot.ParkingLot(10);
             var car = new Car();
             var ticket = parkingLot.Park(car);
             parkingLot.Fetch(ticket); // Simulate fetching the car
-            var fetchedCar = parkingLot.Fetch(ticket); // Attempt to fetch with the same ticket
-            Assert.Null(fetchedCar);
+
+            var exception = Assert.Throws<UnrecognizedTicketException>(() => parkingLot.Fetch(ticket));
+            Assert.Equal("Unrecognized parking ticket.", exception.Message);
         }
 
         [Fact]
-        public void ParkCar_WhenParkingLotIsFull_ReturnsNull()
+        public void ParkCar_WhenParkingLotIsFull_ThrowsNoAvailablePositionException()
         {
             var parkingLot = new ParkingLot.ParkingLot(1); // Parking lot with capacity of 1
             var car1 = new Car();
-            var car2 = new Car();
             parkingLot.Park(car1); // Park first car
-            var ticket = parkingLot.Park(car2); // Attempt to park another car
-            Assert.Null(ticket);
+
+            var car2 = new Car();
+            var exception = Assert.Throws<NoAvailablePositionException>(() => parkingLot.Park(car2));
+            Assert.Equal("No available position.", exception.Message);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace ParkingLot
         {
             if (this.parkedCars.Count >= this.capacity || car == null)
             {
-                return null;
+                throw new NoAvailablePositionException();
             }
 
             var ticket = new Ticket();
@@ -30,7 +30,7 @@ namespace ParkingLot
         {
             if (ticket == null || !this.parkedCars.TryGetValue(ticket, out var car))
             {
-                return null;
+                throw new UnrecognizedTicketException();
             }
 
             this.parkedCars.Remove(ticket);
@@ -50,5 +50,19 @@ namespace ParkingLot
         }
 
         public Guid Id { get; private set; }
+    }
+
+    public class UnrecognizedTicketException : Exception
+    {
+        public UnrecognizedTicketException() : base("Unrecognized parking ticket.")
+        {
+        }
+    }
+
+    public class NoAvailablePositionException : Exception
+    {
+        public NoAvailablePositionException() : base("No available position.")
+        {
+        }
     }
 }
