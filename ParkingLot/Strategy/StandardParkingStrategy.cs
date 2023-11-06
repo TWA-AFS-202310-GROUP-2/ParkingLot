@@ -12,14 +12,19 @@ namespace Parking.Strategy
         {
             foreach (var parkingLot in parkingLots)
             {
-                try
+                //try
+                //{
+                //    string carNumber = parkingLot.FetchCar(ticket);
+                //    return carNumber;
+                //}
+                //catch (WrongTicketException wrongTicketException)
+                //{
+                //    continue;
+                //}
+                if (ticket == null || parkingLot.IsContainTheCar(ticket))
                 {
                     string carNumber = parkingLot.FetchCar(ticket);
                     return carNumber;
-                }
-                catch (WrongTicketException wrongTicketException)
-                {
-                    continue;
                 }
             }
 
@@ -30,14 +35,20 @@ namespace Parking.Strategy
         {
             foreach (var parkingLot in parkingLots)
             {
-                try
+                //try
+                //{
+                //    string ticket = parkingLot.Park(carNumber);
+                //    return ticket;
+                //}
+                //catch (FullCapacityException fullCapacityException)
+                //{
+                //    continue;
+                //}
+
+                if (!parkingLot.IsFull())
                 {
                     string ticket = parkingLot.Park(carNumber);
                     return ticket;
-                }
-                catch (FullCapacityException fullCapacityException)
-                {
-                    continue;
                 }
             }
 

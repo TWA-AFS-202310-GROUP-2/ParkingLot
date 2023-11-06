@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Sockets;
 
     public class ParkingLot
     {
         private readonly int capacity = 10;
-        private readonly HashSet<string> usedTickets = new HashSet<string>();
         private readonly Dictionary<string, string> ticketCarMap = new Dictionary<string, string>();
         private int parkingCount = 0;
 
@@ -42,20 +42,31 @@
                 return null;
             }
 
-            if (!ticketCarMap.ContainsKey(ticket) || usedTickets.Contains(ticket))
+            if (!ticketCarMap.ContainsKey(ticket))
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
             }
 
-            usedTickets.Add(ticket);
+            var carNumber = ticketCarMap[ticket];
+            ticketCarMap.Remove(ticket);
             parkingCount--;
 
-            return ticketCarMap[ticket];
+            return carNumber;
         }
 
         public int GetAvailableSpaces()
         {
             return capacity - parkingCount;
+        }
+
+        public bool IsContainTheCar(string ticket)
+        {
+            return ticketCarMap.ContainsKey(ticket);
+        }
+
+        public bool IsFull()
+        {
+            return parkingCount >= capacity;
         }
     }
 }

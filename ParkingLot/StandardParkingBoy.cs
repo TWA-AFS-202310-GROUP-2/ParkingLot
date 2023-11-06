@@ -19,14 +19,19 @@ namespace Parking
         {
             foreach (var parkingLot in parkingLotList)
             {
-                try
+                //try
+                //{
+                //    string ticket = parkingLot.Park(carNumber);
+                //    return ticket;
+                //}
+                //catch (FullCapacityException fullCapacityException)
+                //{
+                //    continue;
+                //}
+                if (!parkingLot.IsFull())
                 {
                     string ticket = parkingLot.Park(carNumber);
                     return ticket;
-                }
-                catch (FullCapacityException fullCapacityException)
-                {
-                    continue;
                 }
             }
 
@@ -37,14 +42,19 @@ namespace Parking
         {
             foreach (var parkingLot in parkingLotList)
             {
-                try
+                //try
+                //{
+                //    string carNumber = parkingLot.FetchCar(ticket);
+                //    return carNumber;
+                //}
+                //catch (WrongTicketException wrongTicketException)
+                //{
+                //    continue;
+                //}
+                if (ticket == null || parkingLot.IsContainTheCar(ticket))
                 {
                     string carNumber = parkingLot.FetchCar(ticket);
                     return carNumber;
-                }
-                catch (WrongTicketException wrongTicketException)
-                {
-                    continue;
                 }
             }
 
