@@ -8,16 +8,16 @@ namespace Parking
 {
     public class StandardParkingBoy
     {
-        private List<ParkingLot> parkingLotList;
-
         public StandardParkingBoy(List<ParkingLot> parkingLotList)
         {
-            this.parkingLotList = parkingLotList;
+            this.ParkingLotList = parkingLotList;
         }
+
+        protected List<ParkingLot> ParkingLotList { get; set; }
 
         public string Park(string carNumber)
         {
-            foreach (var parkingLot in parkingLotList)
+            foreach (var parkingLot in ParkingLotList)
             {
                 //try
                 //{
@@ -40,7 +40,7 @@ namespace Parking
 
         public string FetchCar(string ticket = null)
         {
-            foreach (var parkingLot in parkingLotList)
+            foreach (var parkingLot in ParkingLotList)
             {
                 //try
                 //{
